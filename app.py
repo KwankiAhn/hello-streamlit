@@ -4,6 +4,21 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+page = st.sidebar.selectbox("Choose a page", ["Homepage", "Exploration"])
+if page == "Homepage":
+    st.header("This is your data explorer.")
+    st.write("Please select a page on the left.")
+
+elif page == "Exploration":
+    st.title("Data Exploration")
+
+page2 = st.sidebar.selectbox("Choose a 2nd", ["HI", "HELLO"])
+if page2 == "HI":
+    st.write("this is hi")
+
+elif page2 == "HELLO":
+    st.write("this is hello")
+
 st.title('My first app')
 st.write("Here's our first attempt at using data to create a table:")
 st.write(pd.DataFrame({
@@ -60,5 +75,10 @@ import graphviz as graphviz
 #         sleep -> runmem
 #     }
 # ''')
-graph = graphviz.DiGraph()
-graph.edge('run', 'intr')
+# graph = graphviz.DiGraph()
+# graph.edge('run', 'intr')
+
+
+
+
+

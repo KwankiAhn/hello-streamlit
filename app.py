@@ -4,6 +4,11 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+
+click = st.sidebar.button("click me")
+if click:
+    st.write("clicked")
+
 page = st.sidebar.selectbox("Choose a page", ["Homepage", "Exploration"])
 if page == "Homepage":
     st.header("This is your data explorer.")

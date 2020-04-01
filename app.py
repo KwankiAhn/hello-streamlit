@@ -57,7 +57,7 @@ option = st.selectbox(
 
 "hello"
 
-import graphviz as graphviz
+# import graphviz as graphviz
 # st.graphviz_chart('''
 #     digraph {
 #         run -> intr
@@ -75,10 +75,37 @@ import graphviz as graphviz
 #         sleep -> runmem
 #     }
 # ''')
-# graph = graphviz.DiGraph()
-# graph.edge('run', 'intr')
 
+from visualize.graph import Digraph
+dg = Digraph();
 
+dot_graph = """
+digraph graphname {
+    rankdir=LR;
+    size="8,6";
+    device_profile [shape=box];
+    reco_result [shape=box];
+    umd [shape=box];
+    kpi [shape=box];
 
+    device_profile -> etl;
+    etl -> models;
+    models -> doc2vec_movie;
+    models -> doc2vec_show;
+    models -> tfidf_movie;
+    models -> tfidf_show;
+    doc2vec_movie -> post_proc;
+    doc2vec_show -> post_proc;
+    tfidf_movie -> post_proc;
+    tfidf_show -> post_proc;
+    post_proc -> reco_result;
 
+    umd -> models;
 
+    kpi -> reco_signals;
+    reco_signals -> models;
+}
+"""
+fn = ('simple_dot_example1', 'png')
+g, path = dg.save_graph_as_svg(dot_graph, fn[0], fn[1])
+st.image("{}/{}.{}".format(path, fn[0], fn[1]))
